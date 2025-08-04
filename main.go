@@ -69,6 +69,7 @@ func readCsvAsync(
 					return
 				default:
 					ch <- RecordsDto{End: true}
+					return
 				}
 			}
 
@@ -80,6 +81,9 @@ func readCsvAsync(
 				ch <- RecordsDto{
 					Records: records,
 					End:     !hasMore,
+				}
+				if !hasMore {
+					return
 				}
 			}
 		}
